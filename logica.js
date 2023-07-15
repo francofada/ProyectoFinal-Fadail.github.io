@@ -5,7 +5,7 @@ let tablacompra = document.getElementById('tablaCarro');
 
 //BOTONES A ASIGNAR (CARRO)
 let btnFinalizar = document.getElementById('btnFinalizar');//BOTON FINALIZAR COMPRA
-let btnDesc = document.getElementById('btnDesc');//BOTON DESCUENTO
+
 
 //CONTENIDO DE PRODUCTOS
 let contenidoProductos = document.getElementById('cartasProd');
@@ -148,7 +148,7 @@ function precioFiltrado(precio){
 //OBTENCION DE PRECIOS MAXIMO
 const precios = productos.map(producto => producto.precio);
 const precioMax = Math.max(...precios);
-console.log(precioMax);
+console.log("Producto maximo: "+precioMax);
 //FUNCION BUSCAR PRECIO
 buscarBtn.addEventListener('click', function() {
 // Obtiene el valor del campo de entrada de texto
@@ -165,7 +165,7 @@ buscarBtn.addEventListener('click', function() {
     }
     else {
         const productosMaximos = precioFiltrado(precioMaximoLocal);
-        console.table(productosMaximos);
+        console.log("Producto maximo: "+productosMaximos);
         listaInicio(productosMaximos);
     }
   }
@@ -242,16 +242,17 @@ function compraBoton(){
 //AGREGAR CARRO
 function agregarCarrito(producto){
     carrito.push(producto);
+    console.table(carrito);
     //TABLA DEL CARRITO
     tablacompra.innerHTML += `
     <tr>
         <th scope="row">${producto.id}</th>
         <td>${producto.titulo}</td>                        
         <td>$${producto.precio}</td>
-        <th><button type="button" class="btn-close delete-product"  aria-label="Close"></button></th>
+        <th><button type="button" class="btn-close delete"  aria-label="Close"></button></th>
     </tr>
   
-    `;
+    `; 
     //SWEET ALERT
     Swal.fire({
         title: `Agregaste ${producto.titulo} al carrito`,
@@ -270,17 +271,17 @@ function agregarCarrito(producto){
    
 }
 
-
 //FINALIZAR COMPRA
 btnFinalizar.addEventListener('click',finalizarCarrito);
 function finalizarCarrito(){
+    
     tablacompra.innerHTML = '';
     // Actualiza el total del carrito en el DOM
     document.getElementById('totalProd').innerText = 'TOTAL $: 0';
     
     // Elimina los datos del carrito del localStorage
-    localStorage.clear('carrito');
-    localStorage.clear('Monto total $'); 
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('Monto total $'); 
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -306,8 +307,8 @@ function vaciarCarrito() {
     document.getElementById('totalProd').innerText = 'TOTAL $: 0';
     
     // Elimina los datos del carrito del localStorage
-    localStorage.clear('carrito');
-    localStorage.clear('Monto total $'); 
+    localStorage.removeItem('carrito');
+    localStorage.removeItem('Monto total $'); 
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
