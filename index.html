@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PLAYGAMES</title>
+    <!--icons-->
+    <script src="https://kit.fontawesome.com/52361a2a95.js" crossorigin="anonymous"></script>
+    <!--ESTILOS-->
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+<body>
+<!--NAV BAR - START-->
+  <nav class="navbar bg-body-tertiary fixed-top">
+    <div class="container-fluid ">
+<!--NAVEGADOR START-->
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid" id="btnCategorias">
+          <a class="navbar-brand">
+            <img src="/PG.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+            PLAYGAMES
+          </a>
+          <a class="btn" id="btnTienda">TIENDA</a>
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+          <a class="btn" id="btnJuegos">JUEGOS</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn" id="btnAcces">ACCESORIOS</a>
+              </li>
+              <li class="nav-item">
+                <a class="btn" id="btnGift">GIFT CARD</a>
+              </li>
+            </ul>
+            
+          </div>
+        </div>
+      </nav>
+<!--NAVEGADOR END-->          
+<!--CARRO DE COMPRAS START-->
+      <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <span class="fa-solid fa-cart-shopping"></span>
+     
+      </button>
+      <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas-header">
+          <i class="fa-solid fa-cart-shopping"></i>
+          <h5 class="offcanvas-title" id="offcanvasNavbarLabel">CARRITO</h5>
+          
+          <button type="button " class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+<!--canvas carro-->
+        <div class="offcanvas-body">
+          <div class="modal-body text-light">
+<!--FORMULARIO CARRITO-->
+            <table class="table ">
+              <thead>
+                <tr class="table-warning">
+                  <th scope="col">ID</th>
+                  <th scope="col">DESCRICION</th>
+                  <th scope="col">PRECIO</th>
+                  <th scope="col">BORRAR</th>
+                </tr>
+              </thead>
+              
+              <tbody  id="tablaCarro">
+<!--TABLA DE CARRO(Agregados)-->
+              </tbody>
+              
+            </table>
+
+<!--TOTAL DE LOS PRODUCTOS-->
+            <h1 id="totalProd" class="text-dark"></h1>
+
+          </div>
+
+          <div class="modal-footer ">
+            <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="btnVacio">VACIAR</button>
+            
+            <button type="button" class="btn btn-success" id="btnFinalizar">FINALIZAR COMPRA</button>
+          </div>
+<!--END CARROS DE COMPRA-->
+        </div>
+      </div>
+    </div>
+  </nav>
+<!--NAV BAR - END-->
+ 
+<div class="container-lg text-center">
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="row">
+<!--SELECCION DE PRECIO MAXIMO--> 
+      <div class="col-6 d-flex">
+        <input type="text" class="form-control" id="precioMaximo" placeholder="MAXIMO PRECIO A BUSCAR">
+        <button id="buscarBtn" class="btn btn-warning">BUSCAR</button>
+        <button id="borrarBtn" type="button" class="btn btn-danger">BORRAR</button>
+      </div>
+<!--SELECCION DE OPCIONES-->
+      <div class="col-6 d-flex justify-content-end align-items-center">
+        <div class="d-flex justify-content-end">
+        <select id="opciones" class="form-select p-7" aria-label=" select example">
+            <option value="opcionNull" >ORDENAR</option>
+            <option value="opcion1" id="alfabeta" >ALFABETICAMENTE</option>
+            <option value="opcion2" id="menorMayor">ORDENAR: PRECIO MENOR A MAYOR</option>
+            <option value="opcion3" id="menorMayor">ORDENAR: PRECIO MAYOR A MENOR</option>
+          </select>
+        </div>
+      </div>
+      
+    </div>
+    <br>
+</div>
+  
+  <div class="container text-center text-light">
+    <div class="row  text-center ">
+<!--CARTAS DE PRODUCTOS-->
+      <div id="cartasProd" class="row">
+
+        <!--CARTALOGO DE JUEGOS-->
+        <!--CARTALOGO DE ACCESORIOS-->
+        <!--CARTALOGO DE GIFTCARDS-->
+
+      </div>
+      
+    </div>
+  </div>
+  <div class="container text-center text-light">
+    <div class="row">
+      <div class="col">
+        FOOTER
+      </div>
+    </div>
+  </div>
+
+
+
+    <!--LIBRERIAS-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--BOOTSTRAP-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <!--JAVASCRIPT-->
+    <script src="productos.js"></script>
+    <!--<script src="logicas.js"></script>--->
+    <script src="logica.js"></script>
+</body>
+</html>

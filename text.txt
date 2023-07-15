@@ -1,0 +1,83 @@
+let navbar = document.getElementsByClassName('navBtn');
+for (const btn of navbar){
+        btn.onmouseout =()=>{
+            btn.classList.replace('border-bottom border-warning-subtle','border border-primary-subtle');
+        }
+        btn.onmouseout =()=>{
+            btn.classList.replace('border-bottom border-primary-subtle','border border-warning-subtle');
+        }
+    }
+//ACCION BOTON TIENDA - (MUESTRA TODOS LOS PRODUCTOS)
+
+//ACCION BOTON JUEGOS
+function renderizarListaJuegos(listaJuegos){
+    //Contenedor Vacio
+    contenidoProductos.innerHTML='';
+
+    //Productos
+    for(const prodJuegos of listaJuegos){
+        contenidoProductos.innerHTML+=`
+            <div class="card col-sm-3">
+                <img class="card-img-top" src=${prodJuegos.foto} alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">${prodJuegos.titulo}</h5>
+                    <p class="card-text">$ ${prodJuegos.precio}</p>
+                    <button id=${prodJuegos.id} class="btn btn-outline-warning compra">Comprar</button>
+                </div>
+            </div>
+        `;
+    }
+
+    //EVENTO BOTONES COMPRA CARDS
+    let btnCards = document.getElementsByClassName('compra');
+    for(const boton of btnCards){
+        boton.addEventListener('click',()=>{
+            const prodACarro = productos.find((producto)=>producto.id == boton.id);
+            agregarCarrito(prodACarro);
+        })
+        
+        boton.onmouseover = ()=>{
+            boton.classList.replace('btn-outline-warning','btn-warning');
+        }
+        boton.onmouseout = ()=>{
+            boton.classList.replace('btn-warning','btn-outline-warning');
+        }
+    }
+    
+}
+
+//FIN DE ACCION BOTON JUEGOS
+
+//ACCION BOTON ACCESORIOS
+
+renderizarListaJuegos(productos);
+
+//AGREGAR CARRO
+function agregarCarrito(producto){
+    carrito.push(producto);
+    console.table(carrito);
+    tablacompra.innerHTML += `
+    <tr>
+        <th scope="row">${producto.id}</th>
+        <td>${producto.titulo}</td>                        
+        <td>$${producto.precio}</td>
+        <th><button type="button" class="btn-close" aria-label="Close"></button></th>
+    </tr>
+  
+    `;
+    
+    let total = carrito.reduce((ac,prod)=> ac + prod.precio,0);
+    document.getElementById('totalProd').innerText = `TOTAL $:${total}`;
+    document.getElementById('agregado').innerHTML=`$${total}`;
+    //trabajar con el storage
+    localStorage.setItem('Agregados al Carro',JSON.stringify(carrito));
+    localStorage.setItem('Monto total $',JSON.stringify(total));
+}
+
+
+//Funcion Cupon de Descuento (10%)
+function calcularDescuento(total){
+    let descuento = total * 0.1; // Calcula el 10% del precio
+    let precioFinal = total - descuento; // Resta el descuento al precio original
+    return precioFinal; // Devuelve el precio con el descuento aplicado 
+}
