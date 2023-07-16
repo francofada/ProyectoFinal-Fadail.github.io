@@ -37,7 +37,7 @@ function agregarCarrito(producto) {
       <th scope="row">${producto.id}</th>
       <td>${producto.titulo}</td>                        
       <td>$${producto.precio}</td>
-      <th><button onclick="eliminarProducto(${producto.id})">x</button></th> 
+      <th><i class="fi fi-br-cross" onclick="eliminarProducto(${producto.id})"></i></th> 
     `;
     //SWEET ALERT
     Swal.fire({
@@ -139,7 +139,6 @@ function finalizarCarrito(){
       })
 }
 //VACIAR CARRO
-btnVaciar.addEventListener('click',vaciarCarrito);
 let btnVaciar = document.getElementById('btnVacio');//BOTON VACIAR CARRO
 function vaciarCarrito() {
     tablacompra.innerHTML = '';
@@ -165,5 +164,6 @@ function vaciarCarrito() {
         icon: 'error',
         title: 'Vaciado'
 })}
+btnVaciar.addEventListener('click',vaciarCarrito);
 
 
