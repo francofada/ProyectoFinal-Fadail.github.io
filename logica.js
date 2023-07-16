@@ -1,3 +1,13 @@
+let productos;
+jsonProds()
+//OBTENCION DE JSON
+async function jsonProds(){
+    const URLJSON = '/productos.json';
+    const respuesta = await fetch(URLJSON);
+    const datos = await respuesta.json();
+    productos = datos;
+    listaInicio(productos);
+}
 //CONTENIDO DE PRODUCTOS
 let contenidoProductos = document.getElementById('cartasProd');
 
@@ -32,7 +42,6 @@ function listaInicio(listaDeInicio){
         
             
     }
-listaInicio(productos);
 //PRODCUCTOS EN TIENDA (LO MISMO QUE INICIO)
 btnTienda.addEventListener("click",function(){
     //LIMPIAR EL CONTENIDO DE PRODUCTOS
