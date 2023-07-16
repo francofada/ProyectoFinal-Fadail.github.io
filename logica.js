@@ -1,12 +1,3 @@
-//CONTENIDO DE CARRITO
-const carrito =JSON.parse(localStorage.getItem('carrito'))|| [];
-console.table(carrito);
-let tablacompra = document.getElementById('tablaCarro');
-
-//BOTONES A ASIGNAR (CARRO)
-let btnFinalizar = document.getElementById('btnFinalizar');//BOTON FINALIZAR COMPRA
-
-
 //CONTENIDO DE PRODUCTOS
 let contenidoProductos = document.getElementById('cartasProd');
 
@@ -219,7 +210,6 @@ function accionarOpcion(){
 
 }
 
-
 //FUNCION BOTON COMPRAR (AGREGA AL CARRO) 
 function compraBoton(){
     let btnCompra = document.getElementsByClassName('compra');
@@ -237,92 +227,3 @@ function compraBoton(){
             }
         }
 }
-   
-
-//AGREGAR CARRO
-function agregarCarrito(producto){
-    carrito.push(producto);
-    console.table(carrito);
-    //TABLA DEL CARRITO
-    tablacompra.innerHTML += `
-    <tr>
-        <th scope="row">${producto.id}</th>
-        <td>${producto.titulo}</td>                        
-        <td>$${producto.precio}</td>
-        <th><button type="button" class="btn-close delete"  aria-label="Close"></button></th>
-    </tr>
-  
-    `; 
-    //SWEET ALERT
-    Swal.fire({
-        title: `Agregaste ${producto.titulo} al carrito`,
-        text:  `MONTO A PAGAR $${producto.precio}`,
-        imageUrl: producto.foto,
-        imageWidth: 200,
-        imageHeight: 200,
-        imageAlt: producto.titulo,
-      })
-
-    //CALCULAR TOTAL
-    let total = carrito.reduce((ac,prod)=> ac + prod.precio,0);
-    document.getElementById('totalProd').innerText = `TOTAL $:${total}`;
-    localStorage.setItem("carrito",JSON.stringify(carrito));
-    localStorage.setItem('Monto total $',JSON.stringify(total));
-   
-}
-
-//FINALIZAR COMPRA
-btnFinalizar.addEventListener('click',finalizarCarrito);
-function finalizarCarrito(){
-    
-    tablacompra.innerHTML = '';
-    // Actualiza el total del carrito en el DOM
-    document.getElementById('totalProd').innerText = 'TOTAL $: 0';
-    
-    // Elimina los datos del carrito del localStorage
-    localStorage.removeItem('carrito');
-    localStorage.removeItem('Monto total $'); 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Gracias por su compra'
-      })
-}
-//VACIAR CARRO
-let btnVaciar = document.getElementById('btnVacio');//BOTON VACIAR CARRO
-function vaciarCarrito() {
-    tablacompra.innerHTML = '';
-    // Actualiza el total del carrito en el DOM
-    document.getElementById('totalProd').innerText = 'TOTAL $: 0';
-    
-    // Elimina los datos del carrito del localStorage
-    localStorage.removeItem('carrito');
-    localStorage.removeItem('Monto total $'); 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'error',
-        title: 'Vaciado'
-      })}
-btnVaciar.addEventListener('click',vaciarCarrito);
