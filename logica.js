@@ -2,7 +2,7 @@ let productos;
 jsonProds()
 //OBTENCION DE JSON
 async function jsonProds(){
-    const URLJSON = '/productos.json';
+    const URLJSON = 'productos.json';
     const respuesta = await fetch(URLJSON);
     const datos = await respuesta.json();
     productos = datos;
