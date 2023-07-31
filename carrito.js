@@ -105,14 +105,14 @@ function renderizarCarrito() {
         <th><button onclick="eliminarProducto(${producto.id})">x</button></th> 
       `;
       tablacompra.appendChild(fila);
-    });
+  });
   }
 
 
 
 //FINALIZAR COMPRA
 btnFinalizar.addEventListener('click',finalizarCarrito);
-function finalizarCarrito(){
+/* function finalizarCarrito(){
     
     tablacompra.innerHTML = '';
     // Actualiza el total del carrito en el DOM
@@ -137,6 +137,48 @@ function finalizarCarrito(){
         icon: 'success',
         title: 'Gracias por su compra'
       })
+} */
+function finalizarCarrito(){
+  // Obtener los datos del carrito del localStorage
+  const carrito = localStorage.getItem('carrito');
+  
+  // Verificar si hay objetos en el carrito
+  if(carrito === null) {
+    Swal.fire(
+      'No hay nada en el carro',
+      'Haz tu compra',
+      'warning'
+    )
+      return;
+  }
+  
+  // Limpiar la tabla de compra en el DOM
+  tablacompra.innerHTML = '';
+  
+  // Actualizar el total del carrito en el DOM
+  document.getElementById('totalProd').innerText = 'TOTAL $: 0';
+  
+  // Eliminar los datos del carrito del localStorage
+  localStorage.removeItem('carrito');
+  localStorage.removeItem('Monto total $'); 
+  
+  // Mostrar mensaje de éxito
+  const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+  });
+    
+  Toast.fire({
+      icon: 'success',
+      title: 'Gracias por su compra'
+  });
 }
 //VACIAR CARRO
 let btnVaciar = document.getElementById('btnVacio');//BOTON VACIAR CARRO
