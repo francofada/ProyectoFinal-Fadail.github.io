@@ -112,38 +112,13 @@ function renderizarCarrito() {
 
 //FINALIZAR COMPRA
 btnFinalizar.addEventListener('click',finalizarCarrito);
-/* function finalizarCarrito(){
-    
-    tablacompra.innerHTML = '';
-    // Actualiza el total del carrito en el DOM
-    document.getElementById('totalProd').innerText = 'TOTAL $: 0';
-    
-    // Elimina los datos del carrito del localStorage
-    localStorage.removeItem('carrito');
-    localStorage.removeItem('Monto total $'); 
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 3000,
-        timerProgressBar: true,
-        didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-        }
-      })
-      
-      Toast.fire({
-        icon: 'success',
-        title: 'Gracias por su compra'
-      })
-} */
 function finalizarCarrito(){
   // Obtener los datos del carrito del localStorage
   const carrito = localStorage.getItem('carrito');
   
   // Verificar si hay objetos en el carrito
   if(carrito === null) {
+    //SWEET ALERT
     Swal.fire(
       'No hay nada en el carro',
       'Haz tu compra',

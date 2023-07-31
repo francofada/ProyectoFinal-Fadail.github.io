@@ -1,4 +1,3 @@
-
 jsonProds()
 let productos;
 //OBTENCION DE JSON
